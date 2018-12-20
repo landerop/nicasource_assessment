@@ -1,0 +1,15 @@
+{
+  "name": "XKCD NicaSource",
+  "description": "PHP Assessment - NicaSource",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Luis Landero",
+      "email": "luis12896@gmail.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "^6.3"
+  }
+}
