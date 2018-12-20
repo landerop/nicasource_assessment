@@ -1,0 +1,42 @@
+#main {
+    width: 100%;
+}
+#comic {
+    width: 65%;
+    margin: auto;
+    text-align: center;
+}
+#comic-alt {
+    padding-top: 10px;
+    width: 50%;
+    margin: auto;
+}
+#paginate {
+    padding-top: 25px;
+    width: 30%;
+    margin: auto;
+}
+#error {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    background: #ff6a6a;
+    border: solid 1px red;
+    border-radius: 5px;
+}
+#paginate-next {
+    float: right;
+}
+#paginate-prev {
+    float: left;
+}
+#comic-title {
+    font-weight: bolder;
+    font-size: 50px;
+    padding-bottom: 20px;
+}
+#link-home {
+    width: 30%;
+    margin: auto;
+    text-align: center;
+}
