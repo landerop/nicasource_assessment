@@ -18,6 +18,8 @@ class ComicReader extends Router
 
     public $currentComicId = 0;
 
+    public $isTodayWebcomic = false;
+
     public function __construct()
     {
         if(is_null($this->httpClient)) {
@@ -65,9 +67,12 @@ class ComicReader extends Router
         else {
             $comicInfo = $this->getTodayWebComic();
         }
-        $this->currentComicId = $this->comicInfo->num;
+
 
         $this->comicInfo = json_decode($comicInfo);
+
+        $this->currentComicId = $this->comicInfo->num;
+
         include_once 'src/templates/display_comic.html.php';
     }
 
