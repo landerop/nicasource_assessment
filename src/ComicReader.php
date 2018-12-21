@@ -2,10 +2,6 @@
 /**
  * Created by Luis Landero.
  */
-Use Carbon\Carbon;
-
-require_once 'src/Router.php';
-require_once 'vendor/autoload.php';
 
 class ComicReader extends Router
 {
@@ -22,7 +18,7 @@ class ComicReader extends Router
 
     public function __construct()
     {
-        if(is_null($this->httpClient)) {
+        if (is_null($this->httpClient)) {
             $this->httpClient = new \GuzzleHttp\Client();
         }
     }
@@ -57,11 +53,17 @@ class ComicReader extends Router
     public function displayComic()
     {
         $serverRequest = $this->getRequest();
-
-        if(is_numeric($serverRequest[2])) {
+        if (is_numeric($serverRequest[2])) {
             $comicInfo = $this->getWebComicById($serverRequest[2]);
-            if(!$comicInfo) {
-                header('Location: /comic/'.($serverRequest[2]+1));
+            if (!$comicInfo) {
+                //this conditional is to see if the href clicked was the previous or next, e.g:
+                // comic 405 url should return comic 403 if you click previous
+                // comic 403 url should return comic 405 if you click next
+                if (isset($_GET['prev'])) {
+                    header('Location: /comic/'.($serverRequest[2]-1).'/?prev');
+                } else {
+                    header('Location: /comic/'.($serverRequest[2]+1).'/?next');
+                }
             }
         }
         else {
@@ -82,24 +84,28 @@ class ComicReader extends Router
      */
     public function getPaginator()
     {
-        $isLast = false;
-        $today = Carbon::now();
-        $comicDate = Carbon::create($this->comicInfo->year, $this->comicInfo->month, $this->comicInfo->day);
-        $comicDateDiffToday = $today->diffInDays($comicDate);
-
-        //it checks if the given comic's date is less or iqual to 1 day, meaning it's the last
-        if($comicDateDiffToday == 0 || $comicDateDiffToday == 1) {
-            $isLast = true;
-        }
+        //Since the comic response doesn't provide any info about the last comic, we call this simple routine
+        $isLast = $this->isLastWebComic();
 
         $paginatorString = '';
-        if($this->currentComicId > 1) {
-            $paginatorString .= '<div id="paginate-prev"><a href="/comic/'.($this->currentComicId - 1).'">Prev</a></div>';
+        if ($this->currentComicId > 1) {
+            $paginatorString .= '<div id="paginate-prev"><a href="/comic/'.($this->currentComicId - 1).'/?prev">Prev</a></div>';
         }
-        if(!$isLast) {
-            $paginatorString .= '<div id="paginate-next"><a href="/comic/' . ($this->currentComicId + 1) . '">Next</a></div>';
+        if (!$isLast) {
+            $paginatorString .= '<div id="paginate-next"><a href="/comic/' . ($this->currentComicId + 1) . '/?next">Next</a></div>';
         }
 
         return $paginatorString;
+    }
+
+    /**
+     * it checks if a comic is the lastone, based on a simple condition that tries to bring next day's webcomic and the day
+     * after, based on the current webcomic
+     * @return bool
+     */
+    private function isLastWebComic()
+    {
+        return (!$this->getWebComicById($this->comicInfo->num + 1)  &&
+        !$this->getWebComicById($this->comicInfo->num + 2));
     }
 }
