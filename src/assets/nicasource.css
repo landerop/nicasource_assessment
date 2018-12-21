@@ -1,15 +1,11 @@
-#main {
-    width: 100%;
-}
-#comic {
-    width: 65%;
-    margin: auto;
+#comic-image {
     text-align: center;
 }
 #comic-alt {
-    padding-top: 10px;
-    width: 50%;
+    padding: 10px 0 10px 0;
+    width: 90%;
     margin: auto;
+    text-align: center;
 }
 #paginate {
     padding-top: 25px;
@@ -24,16 +20,11 @@
     border: solid 1px red;
     border-radius: 5px;
 }
-#paginate-next {
-    float: right;
-}
-#paginate-prev {
-    float: left;
-}
 #comic-title {
     font-weight: bolder;
     font-size: 50px;
     padding-bottom: 20px;
+    text-align: center;
 }
 #link-home {
     width: 30%;

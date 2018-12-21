@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <link rel="apple-touch-icon" sizes="76x76" href="/src/assets/img/apple-icon.png" />
     <link rel="icon" type="image/png" href="/src/assets/img/favicon.png" />
-    <title>XKCD Viewer - NicaSource</title>
+    <title>Paper Bootstrap Wizard by Creative Tim</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -16,29 +16,32 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="/src/assets/css/demo.css" rel="stylesheet" />
-
-    <!-- CSS created for styling the comic div -->
     <link href="/src/assets/nicasource.css" media="all" rel="stylesheet" type="text/css" />
+
+    <!-- Fonts and Icons -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="/src/assets/css/themify-icons.css" rel="stylesheet">
 </head>
 
 <body>
 <div class="image-container set-full-height" style="background-image: url('/src/assets/img/paper-1.jpeg')">
     <!--   Creative Tim Branding   -->
-    <a href="/">
+    <a href="http://creative-tim.com">
         <div class="logo-container">
             <div class="logo">
                 <img src="/src/assets/img/new_logo.png">
             </div>
             <div class="brand">
-                Nica Source
+                Creative Tim
             </div>
         </div>
     </a>
 
     <!--  Made With Paper Kit  -->
-    <a href="#" class="made-with-pk">
-        <div class="brand">NS</div>
-        <div class="made-with">Made for <strong>NicaSource</strong></div>
+    <a href="http://demos.creative-tim.com/paper-kit?ref=paper-bootstrap-wizard" class="made-with-pk">
+        <div class="brand">PK</div>
+        <div class="made-with">Made with <strong>Paper Kit</strong></div>
     </a>
 
     <!--   Big container   -->
@@ -59,7 +62,7 @@
                         </div>
 
                         <div class="wizard-footer">
-                            <?php echo $this->renderFooter(); ?>
+                            <?php echo $this->getPaginator(); ?>
                         </div>
 
                     </div>
@@ -76,5 +79,12 @@
 </div>
 
 </body>
+
+<!--   Core JS Files   -->
+<script src="/src/assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="/src/assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
+<script src="/src/assets/js/jquery.validate.min.js" type="text/javascript"></script>
 
 </html>

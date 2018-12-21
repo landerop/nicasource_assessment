@@ -82,18 +82,29 @@ class ComicReader extends Router
      * builds the paginator based on some conditions, called inside the template
      * @return string
      */
-    public function getPaginator()
+    public function renderFooter()
     {
         //Since the comic response doesn't provide any info about the last comic, we call this simple routine
         $isLast = $this->isLastWebComic();
 
+        $fillPrevious = 'btn-default';
+        if($isLast) {
+            $fillPrevious = 'btn-warning btn-fill';
+        }
+
+        $fillNext = 'btn-default';
+        if($this->currentComicId == 1) {
+            $fillNext = 'btn-warning btn-fill';
+        }
+
         $paginatorString = '';
         if ($this->currentComicId > 1) {
-            $paginatorString .= '<div id="paginate-prev"><a href="/comic/'.($this->currentComicId - 1).'/?prev">Prev</a></div>';
+            $paginatorString .= '<div class="pull-left"><a href="/comic/'.($this->currentComicId - 1).'/?prev" class="btn btn-next '.$fillPrevious.' btn-wd">Previous</a></div>';
         }
         if (!$isLast) {
-            $paginatorString .= '<div id="paginate-next"><a href="/comic/' . ($this->currentComicId + 1) . '/?next">Next</a></div>';
+            $paginatorString .= '<div class="pull-right"> <a href="/comic/' . ($this->currentComicId + 1) . '/?next" class="btn btn-previous '.$fillNext.' btn-wd">Next</a>  </div>';
         }
+        $paginatorString .= '<div class="clearfix"></div>';
 
         return $paginatorString;
     }

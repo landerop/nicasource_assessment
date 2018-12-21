@@ -27,12 +27,12 @@ class ComicReaderTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('ComicReader', $this->sut);
     }
 
-    public function testGetPaginator()
+    public function testRenderFooter()
     {
         $this->getComicFakeResponse();
 
-        $paginatorHtml = $this->sut->getPaginator();
-        $this->assertEquals($this->getFakePaginatorHtml(), $paginatorHtml);
+        $paginatorHtml = $this->sut->renderFooter();
+        $this->assertEquals($this->getFooterHtml(), $paginatorHtml);
     }
 
     public function testDisplayComic()
@@ -54,36 +54,94 @@ class ComicReaderTest extends \PHPUnit\Framework\TestCase
         $this->sut->currentComicId = 320;
     }
 
-    private function getFakePaginatorHtml()
+    private function getFooterHtml()
     {
         return <<<OET
-<div id="paginate-prev"><a href="/comic/319/?prev">Prev</a></div><div id="paginate-next"><a href="/comic/321/?next">Next</a></div>
+<div class="pull-left"><a href="/comic/319/?prev" class="btn btn-next btn-default btn-wd">Previous</a></div><div class="pull-right"> <a href="/comic/321/?next" class="btn btn-previous btn-default btn-wd">Next</a>  </div><div class="clearfix"></div>
 OET;
     }
 
     private function getDisplayComicHtmlOutput()
     {
         return <<<OET
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/src/assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="/src/assets/img/favicon.png" />
+    <title>XKCD Viewer - NicaSource</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- CSS Files -->
+    <link href="/src/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/src/assets/css/paper-bootstrap-wizard.css" rel="stylesheet" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="/src/assets/css/demo.css" rel="stylesheet" />
+
+    <!-- CSS created for styling the comic div -->
     <link href="/src/assets/nicasource.css" media="all" rel="stylesheet" type="text/css" />
-    <title>XKCD Assessment - NicaSource</title>
 </head>
+
 <body>
-    <div id="main">
-        <div id="comic">
-            <div id="comic-title">28-Hour Day</div>
-            <div id="comic-image">
-                <img src="https://imgs.xkcd.com/comics/28_hour_day.png" alt="Small print: this schedule will eventually drive one stark raving mad.">
+<div class="image-container set-full-height" style="background-image: url('/src/assets/img/paper-1.jpeg')">
+    <!--   Creative Tim Branding   -->
+    <a href="/">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="/src/assets/img/new_logo.png">
             </div>
-            <div id="comic-alt">Small print: this schedule will eventually drive one stark raving mad.</div>
+            <div class="brand">
+                Nica Source
+            </div>
         </div>
-        <div id="paginate">
-            <div id="paginate-prev"><a href="/comic/319/?prev">Prev</a></div><div id="paginate-next"><a href="/comic/321/?next">Next</a></div>        </div>
+    </a>
+
+    <!--  Made With Paper Kit  -->
+    <a href="#" class="made-with-pk">
+        <div class="brand">NS</div>
+        <div class="made-with">Made for <strong>NicaSource</strong></div>
+    </a>
+
+    <!--   Big container   -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+
+                <!--      Wizard container        -->
+                <div class="wizard-container">
+
+                    <div class="card wizard-card" data-color="blue" id="wizardProfile">
+                        <div id="comic">
+                            <div id="comic-title">28-Hour Day</div>
+                            <div id="comic-image">
+                                <img src="https://imgs.xkcd.com/comics/28_hour_day.png" alt="Small print: this schedule will eventually drive one stark raving mad.">
+                            </div>
+                            <div id="comic-alt">Small print: this schedule will eventually drive one stark raving mad.</div>
+                        </div>
+
+                        <div class="wizard-footer">
+                            <div class="pull-left"><a href="/comic/319/?prev" class="btn btn-next btn-default btn-wd">Previous</a></div><div class="pull-right"> <a href="/comic/321/?next" class="btn btn-previous btn-default btn-wd">Next</a>  </div><div class="clearfix"></div>                        </div>
+
+                    </div>
+                </div> <!-- wizard container -->
+            </div>
+        </div><!-- end row -->
+    </div> <!--  big container -->
+
+    <div class="footer">
+        <div class="container text-center">
+            Made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>. Free download <a href="http://www.creative-tim.com/product/paper-bootstrap-wizard">here.</a>
+        </div>
     </div>
+</div>
+
 </body>
+
 </html>
 OET;
     }
